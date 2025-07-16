@@ -1,5 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 import sqlite3
@@ -7,6 +8,8 @@ import json
 import re
 from datetime import datetime
 import hashlib
+import secrets
+import uuid
 
 app = FastAPI(title="Somali AI Dataset API", version="1.0.0")
 
@@ -19,10 +22,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Authentication setup
+security = HTTPBearer()
+
 # Database setup
 def init_db():
     conn = sqlite3.connect('somali_dataset.db')
     cursor = conn.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT UNIQUE NOT NULL,
+            api_key TEXT UNIQUE NOT NULL,
+            plan TEXT DEFAULT 'free',
+            requests_used INTEGER DEFAULT 0,
+            requests_limit INTEGER DEFAULT 100,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            is_active BOOLEAN DEFAULT TRUE
+        )
+    ''')
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS somali_sentences (
@@ -53,13 +72,82 @@ def init_db():
         )
     ''')
     
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS api_usage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            endpoint TEXT,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (id)
+        )
+    ''')
+    
     conn.commit()
     conn.close()
 
 # Initialize database on startup
 init_db()
 
+# Authentication functions
+def generate_api_key():
+    """Generate a secure API key"""
+    return f"sk_live_{secrets.token_urlsafe(32)}"
+
+def verify_api_key(api_key: str):
+    """Verify API key and return user info"""
+    conn = sqlite3.connect('somali_dataset.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT id, email, plan, requests_used, requests_limit, is_active 
+        FROM users WHERE api_key = ? AND is_active = 1
+    ''', (api_key,))
+    
+    user = cursor.fetchone()
+    conn.close()
+    
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    
+    user_id, email, plan, requests_used, requests_limit, is_active = user
+    
+    if requests_used >= requests_limit:
+        raise HTTPException(status_code=429, detail="API rate limit exceeded")
+    
+    return {
+        "user_id": user_id,
+        "email": email,
+        "plan": plan,
+        "requests_used": requests_used,
+        "requests_limit": requests_limit
+    }
+
+def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Dependency to get current authenticated user"""
+    return verify_api_key(credentials.credentials)
+
+def track_api_usage(user_id: int, endpoint: str):
+    """Track API usage for billing"""
+    conn = sqlite3.connect('somali_dataset.db')
+    cursor = conn.cursor()
+    
+    # Log the usage
+    cursor.execute('''
+        INSERT INTO api_usage (user_id, endpoint) VALUES (?, ?)
+    ''', (user_id, endpoint))
+    
+    # Increment user's request count
+    cursor.execute('''
+        UPDATE users SET requests_used = requests_used + 1 WHERE id = ?
+    ''', (user_id,))
+    
+    conn.commit()
+    conn.close()
+
 # Pydantic models
+class UserSignup(BaseModel):
+    email: str
+    plan: str = "free"
 class SomaliSentence(BaseModel):
     text: str
     translation: Optional[str] = None
@@ -141,12 +229,52 @@ def detect_dialect(text: str) -> Dict:
 def read_root():
     return {"message": "Somali AI Dataset API", "status": "active", "version": "1.0.0"}
 
+@app.post("/signup")
+async def signup_user(user: UserSignup):
+    """Sign up a new user and get API key"""
+    
+    api_key = generate_api_key()
+    
+    # Set limits based on plan
+    limits = {
+        "free": 100,
+        "basic": 1000,
+        "premium": 10000,
+        "enterprise": 100000
+    }
+    
+    conn = sqlite3.connect('somali_dataset.db')
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute('''
+            INSERT INTO users (email, api_key, plan, requests_limit)
+            VALUES (?, ?, ?, ?)
+        ''', (user.email, api_key, user.plan, limits.get(user.plan, 100)))
+        
+        conn.commit()
+        
+        return {
+            "message": "User created successfully",
+            "api_key": api_key,
+            "plan": user.plan,
+            "requests_limit": limits.get(user.plan, 100)
+        }
+        
+    except sqlite3.IntegrityError:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    finally:
+        conn.close()
+
 @app.post("/analyze")
-async def analyze_text(analysis: QualityAnalysis):
+async def analyze_text(analysis: QualityAnalysis, current_user: dict = Depends(get_current_user)):
     """Analyze Somali text for quality and dialect"""
     
     if not analysis.text.strip():
         raise HTTPException(status_code=400, detail="Text cannot be empty")
+    
+    # Track API usage
+    track_api_usage(current_user["user_id"], "/analyze")
     
     quality_metrics = calculate_quality_score(analysis.text)
     dialect_info = detect_dialect(analysis.text)
@@ -156,7 +284,9 @@ async def analyze_text(analysis: QualityAnalysis):
         "quality_metrics": quality_metrics,
         "dialect_detection": dialect_info,
         "validation_status": "processed",
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "user_plan": current_user["plan"],
+        "requests_remaining": current_user["requests_limit"] - current_user["requests_used"] - 1
     }
 
 @app.post("/sentences")
