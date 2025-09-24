@@ -461,6 +461,20 @@
 
         /* Enhanced Responsive Design */
 
+        /* Fix for horizontal scroll and overflow */
+        * {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .hero-container {
+            overflow-x: hidden;
+        }
+
         /* Small Mobile Devices (320px - 480px) */
         @media (max-width: 480px) {
             .nav-container {
@@ -478,19 +492,47 @@
 
             /* Hero section mobile */
             .hero-container {
-                padding: 0 1rem;
+                padding: 0 !important;
+                max-width: 100% !important;
             }
 
-            /* Make hero section stack vertically on mobile */
-            .hero-container > div > div:first-child {
+            .hero-container > div {
+                padding: 1rem !important;
+            }
+
+            /* Fix hero top row for mobile */
+            .hero-top-row {
                 flex-direction: column !important;
                 gap: 2rem !important;
+                align-items: center !important;
+            }
+
+            .logo-section {
+                flex-direction: column !important;
+                align-items: center !important;
                 text-align: center !important;
             }
 
-            .hero-container img {
-                width: 100px !important;
-                height: 100px !important;
+            .hero-logo {
+                width: 80px !important;
+                height: 80px !important;
+            }
+
+            .hero-text div {
+                font-size: 1.2rem !important;
+            }
+
+            .save-date-section {
+                padding: 0 !important;
+            }
+
+            .save-date-text {
+                font-size: 1.8rem !important;
+                letter-spacing: 0.05em !important;
+            }
+
+            .qr-section {
+                display: none !important; /* Hide QR on mobile */
             }
 
             .hero-container h1 {
@@ -506,17 +548,23 @@
             }
 
             /* Event details mobile */
-            .hero-container > div > div:nth-child(2) > div {
+            .event-details {
                 flex-direction: column !important;
-                gap: 2rem !important;
+                gap: 1.5rem !important;
+                padding: 1rem !important;
             }
 
-            .hero-container > div > div:nth-child(2) > div > div {
-                padding: 0 !important;
+            .event-details > div {
+                padding: 1rem !important;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .event-details > div:last-child {
+                border-bottom: none;
             }
 
             /* Hide vertical lines on mobile */
-            .hero-container > div > div:nth-child(2) > div > div[style*="width: 2px"] {
+            .event-details > div[style*="width: 2px"] {
                 display: none !important;
             }
 
@@ -712,18 +760,18 @@
     <section class="hero" id="home" style="background: #E8E2DD; min-height: 100vh; padding: 3rem 0;">
         <div class="hero-container" style="max-width: 1400px; margin: 0 auto;">
             <div style="background: #E8E2DD; padding: 2rem;">
-                
+
                 <!-- Top Row with Logo and QR Code -->
-                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 3rem;">
+                <div class="hero-top-row" style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 3rem;">
                     
                     <!-- Left: GEW Logo and Text -->
-                    <div style="display: flex; align-items: center; gap: 25px;">
+                    <div class="logo-section" style="display: flex; align-items: center; gap: 25px;">
                         <!-- GEW Logo with UTAH inside -->
                         <!-- Utah Logo -->
-                        <img src="utah-ges-logo-new.svg" alt="GEW Utah Logo" style="width: 160px; height: 160px;" />
+                        <img src="utah-ges-logo-new.svg" alt="GEW Utah Logo" class="hero-logo" style="width: 160px; height: 160px;" />
 
                         <!-- UTAH GLOBAL ENTREPRENEURSHIP WEEK text -->
-                        <div>
+                        <div class="hero-text">
                             <div style="font-size: 2.2rem; font-weight: 400; color: #5A5A5A; line-height: 0.95; font-family: 'Helvetica Neue', Arial, sans-serif; letter-spacing: -0.5px;">UTAH GLOBAL</div>
                             <div style="font-size: 2.2rem; font-weight: 400; color: #5A5A5A; line-height: 0.95; font-family: 'Helvetica Neue', Arial, sans-serif; letter-spacing: -0.5px;">ENTREPRENEURSHIP</div>
                             <div style="font-size: 2.2rem; font-weight: 400; color: #5A5A5A; line-height: 0.95; font-family: 'Helvetica Neue', Arial, sans-serif; letter-spacing: -0.5px;">WEEK</div>
@@ -731,14 +779,14 @@
                     </div>
                     
                     <!-- Center: SAVE THE DATE -->
-                    <div style="text-align: center; flex-grow: 1; padding: 0 2rem;">
-                        <h1 style="color: #B91C1C; font-size: 3.5rem; font-weight: 700; letter-spacing: 0.15em; margin: 0; font-family: 'Arial Black', sans-serif;">SAVE THE DATE</h1>
+                    <div class="save-date-section" style="text-align: center; flex-grow: 1; padding: 0 2rem;">
+                        <h1 class="save-date-text" style="color: #B91C1C; font-size: 3.5rem; font-weight: 700; letter-spacing: 0.15em; margin: 0; font-family: 'Arial Black', sans-serif;">SAVE THE DATE</h1>
                     </div>
                     
                     <!-- Right: Registration/Info and QR -->
-                    <div style="text-align: right;">
+                    <div class="qr-section" style="text-align: right;">
                         <p style="font-size: 1rem; margin-bottom: 0.5rem; color: #1A1A1A; font-family: Arial, sans-serif;">Registration/Info</p>
-                        <a href="https://www.zeffy.com/en-US/ticketing/utah-global-entrepreneurship-summit" target="_blank" style="display: inline-block; width: 120px; height: 120px; background: white; border: 2px solid #1A1A1A; padding: 8px; margin-left: auto;">
+                        <a href="https://www.zeffy.com/en-US/ticketing/utah-global-entrepreneurship-summit" target="_blank" class="qr-code" style="display: inline-block; width: 120px; height: 120px; background: white; border: 2px solid #1A1A1A; padding: 8px; margin-left: auto;">
                             <!-- Accurate QR Code Image -->
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwOS8xOS8yNOaItFQAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAEOklEQVR4nO3dQW7jMAwFUHfR+x+5s8jCgIEiUpYl8r8HZJOFbVJ8JmVRTpLneZ7/4Db/Xr0B/I6gYQQNI2gYQcMIGkbQMIKGETSMoGEEDSNoGEHDCBpG0DCChhE0jKBhBA0jaBhBwwgaRtAwgoYRNIygYQQNI2gYQcMIGkbQMIKGETSMoGEEDSNoGEHDCBpG0DCChhE0jKBhBA0jaBhBwwgaRtAwgoYRNIygYQQNI2gYQcP8fvUGcL3neX7t/zzP88c2GdAwgoYRNIygYUyKDrBrkvPrOZSRoXvyGKFhBA0jaBgz9AAz88DnxdY1BA1jyj2AIaGfERpG0DCChjFDD2DqLWOEhhE0jKBhBA1jUrSzVjezJkRjgoYRNIyRm0xGbhhBw8goOsBuJzKGOJQRGkbQMIKGMUNfsNup8J4RGsYIPZi1SOMYoWEEDSNoGEHDCBpGHxrGyJ0w8mY8IzSMoGEEDSNoGEHDCBpG0DBW7HbWytSryxn1jpJjhG5YFvC0mjHfz/++fv7V51+1zXcTNIygYQQNY1K0s10TnRnJ5Oec8TMjNIygYQQNY4YSywgNI2gYQcOYoQHscLYfIzSMoGEEDWOGhrFp1HeMUA6xXMdl4jTHCA0jaBhBw5ihTzJbd2CEHmSVkTta+c6uI3T1/afXjNAwgoYRNIwZ+oIdVoF2YISGETSMoGEEDWNS9ILZ05xWfehuxw47MqseM0LDCBpmyJG7+v2VdutY+bVZdUUFPz28Jx1HaNj/LGqGJlzArJF7MDM1j6BhBA0jaBhBw+hDd7b7xZzZfegKRmgYQcMIGsYMvciuA/vKGRr3m0VGaBgjt5F8gvUIM/T/U/DyJ7/6vWaO/v1mhIYRNIyRy2UZJktG6MFG2r4rH/MzQsMIGkbQMGZomD23q1pBiJshzwjdme47xggNI2gYQcMIGkbQMIKGWd62HAVNhRkjdGcCfmWEhhE0jKBhzNADvPu82bJEfn7sttEzQiJBwwgaRtAwJkU7W+VCRjOueeUqo5YRGkbQMIKGMUMDWGS/xggNI2iYIU6Kvr6SsZyYLrF7KcVJ0TAmRYwJGsYMzWLWfmWGHmCX6z3vLjMJGsZf7k3WJbN52n4/7P9/XZYvXx96Z2NF39kudfRJCCshXxH0AIKG8V7uzk493bWyknT2D9HIOzDejI+z81GUkftHCBrGDGVshoa9fXGnU7fP7+eaJkVMCRpG0DBmaJgVqhVhxqToBu+ZzmGEhhE0jKBhzNAd9Hq6YrWJWtRv7hihYQQNI2gYM7TBKgMqzYrlvA6sBBPACA0jaBhBw5ihDXY5pbWPnU7xKMcI5RBGaBhBwwgaxgw9kAs4PZihYQQNI2gYQcMIGkbQMIKGETSMoGEEDSNoGEHDCBpG0DCChhE0jKBhBA0jaBhBwwgaRtAwgoYRNIygYQQNI2gYQcMIGkbQMIKGETSMoGEEDfMfu6XhH6Qq3Q0AAAAASUVORK5CYII=" 
                                  alt="QR Code for Registration" 
@@ -770,7 +818,7 @@
                     </p>
                     
                     <!-- Event Details with vertical lines -->
-                    <div style="display: flex; justify-content: center; align-items: stretch; gap: 0; max-width: 1000px; margin: 3rem auto;">
+                    <div class="event-details" style="display: flex; justify-content: center; align-items: stretch; gap: 0; max-width: 1000px; margin: 3rem auto;">
                         
                         <!-- WHEN -->
                         <div style="flex: 1; padding: 0 3rem;">
