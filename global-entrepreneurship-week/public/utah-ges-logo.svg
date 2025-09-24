@@ -1,0 +1,92 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Colorful ring segments matching exact Utah logo -->
+  <g transform="translate(50, 50)">
+    <!-- Create proper wedge segments based on the actual image -->
+
+    <!-- Top segment - Light Pink -->
+    <path d="M 0 0 L 0 -45 A 45 45 0 0 1 8 -44.3 L 0 0" fill="#FFB6C1"/>
+    <!-- Lavender -->
+    <path d="M 0 0 L 8 -44.3 A 45 45 0 0 1 15.5 -42.2 L 0 0" fill="#E6E6FA"/>
+    <!-- Light Purple -->
+    <path d="M 0 0 L 15.5 -42.2 A 45 45 0 0 1 22.5 -39 L 0 0" fill="#D8BFD8"/>
+    <!-- Periwinkle Blue -->
+    <path d="M 0 0 L 22.5 -39 A 45 45 0 0 1 28.5 -34.8 L 0 0" fill="#9999CC"/>
+    <!-- Sky Blue -->
+    <path d="M 0 0 L 28.5 -34.8 A 45 45 0 0 1 33.7 -29.8 L 0 0" fill="#87CEEB"/>
+    <!-- Navy Blue -->
+    <path d="M 0 0 L 33.7 -29.8 A 45 45 0 0 1 37.8 -24.4 L 0 0" fill="#4B5C8A"/>
+    <!-- Dark Blue -->
+    <path d="M 0 0 L 37.8 -24.4 A 45 45 0 0 1 40.9 -18.7 L 0 0" fill="#36454F"/>
+    <!-- Purple -->
+    <path d="M 0 0 L 40.9 -18.7 A 45 45 0 0 1 43 -13.3 L 0 0" fill="#9370DB"/>
+    <!-- Pink -->
+    <path d="M 0 0 L 43 -13.3 A 45 45 0 0 1 44.3 -8 L 0 0" fill="#FFC0CB"/>
+
+    <!-- Right side - Cyan/Turquoise area -->
+    <path d="M 0 0 L 44.3 -8 A 45 45 0 0 1 45 0 L 0 0" fill="#AFEEEE"/>
+    <path d="M 0 0 L 45 0 A 45 45 0 0 1 44.3 8 L 0 0" fill="#48D1CC"/>
+    <!-- Magenta/Deep Pink -->
+    <path d="M 0 0 L 44.3 8 A 45 45 0 0 1 43 13.3 L 0 0" fill="#C71585"/>
+
+    <!-- Right Bottom - Gray Blue -->
+    <path d="M 0 0 L 43 13.3 A 45 45 0 0 1 40.9 18.7 L 0 0" fill="#778899"/>
+    <path d="M 0 0 L 40.9 18.7 A 45 45 0 0 1 37.8 24.4 L 0 0" fill="#B0C4DE"/>
+
+    <!-- Bottom Right - Teal -->
+    <path d="M 0 0 L 37.8 24.4 A 45 45 0 0 1 33.7 29.8 L 0 0" fill="#5F9EA0"/>
+    <path d="M 0 0 L 33.7 29.8 A 45 45 0 0 1 28.5 34.8 L 0 0" fill="#4682B4"/>
+
+    <!-- Bottom - Yellow Green -->
+    <path d="M 0 0 L 28.5 34.8 A 45 45 0 0 1 22.5 39 L 0 0" fill="#9ACD32"/>
+    <path d="M 0 0 L 22.5 39 A 45 45 0 0 1 15.5 42.2 L 0 0" fill="#ADFF2F"/>
+    <!-- Yellow -->
+    <path d="M 0 0 L 15.5 42.2 A 45 45 0 0 1 8 44.3 L 0 0" fill="#FFFF00"/>
+    <path d="M 0 0 L 8 44.3 A 45 45 0 0 1 0 45 L 0 0" fill="#FFD700"/>
+
+    <!-- Bottom Left - Green -->
+    <path d="M 0 0 L 0 45 A 45 45 0 0 1 -8 44.3 L 0 0" fill="#90EE90"/>
+    <path d="M 0 0 L -8 44.3 A 45 45 0 0 1 -15.5 42.2 L 0 0" fill="#00FF00"/>
+    <!-- Brown -->
+    <path d="M 0 0 L -15.5 42.2 A 45 45 0 0 1 -22.5 39 L 0 0" fill="#8B4513"/>
+
+    <!-- Left Bottom - Light Blue -->
+    <path d="M 0 0 L -22.5 39 A 45 45 0 0 1 -28.5 34.8 L 0 0" fill="#ADD8E6"/>
+    <path d="M 0 0 L -28.5 34.8 A 45 45 0 0 1 -33.7 29.8 L 0 0" fill="#87CEFA"/>
+
+    <!-- Left - Red/Coral -->
+    <path d="M 0 0 L -33.7 29.8 A 45 45 0 0 1 -37.8 24.4 L 0 0" fill="#CD5C5C"/>
+    <path d="M 0 0 L -37.8 24.4 A 45 45 0 0 1 -40.9 18.7 L 0 0" fill="#DC143C"/>
+    <!-- Orange Red -->
+    <path d="M 0 0 L -40.9 18.7 A 45 45 0 0 1 -43 13.3 L 0 0" fill="#FF4500"/>
+    <!-- Yellow -->
+    <path d="M 0 0 L -43 13.3 A 45 45 0 0 1 -44.3 8 L 0 0" fill="#FFD700"/>
+    <!-- Coral/Salmon -->
+    <path d="M 0 0 L -44.3 8 A 45 45 0 0 1 -45 0 L 0 0" fill="#FFA07A"/>
+
+    <!-- Top Left - Orange -->
+    <path d="M 0 0 L -45 0 A 45 45 0 0 1 -44.3 -8 L 0 0" fill="#FF8C00"/>
+    <path d="M 0 0 L -44.3 -8 A 45 45 0 0 1 -43 -13.3 L 0 0" fill="#FF7F50"/>
+    <path d="M 0 0 L -43 -13.3 A 45 45 0 0 1 -40.9 -18.7 L 0 0" fill="#FF6347"/>
+    <!-- Red Orange -->
+    <path d="M 0 0 L -40.9 -18.7 A 45 45 0 0 1 -37.8 -24.4 L 0 0" fill="#FF4500"/>
+    <!-- Pink -->
+    <path d="M 0 0 L -37.8 -24.4 A 45 45 0 0 1 -33.7 -29.8 L 0 0" fill="#FFC0CB"/>
+    <path d="M 0 0 L -33.7 -29.8 A 45 45 0 0 1 -28.5 -34.8 L 0 0" fill="#FFB6C1"/>
+    <path d="M 0 0 L -28.5 -34.8 A 45 45 0 0 1 -22.5 -39 L 0 0" fill="#FFA07A"/>
+    <path d="M 0 0 L -22.5 -39 A 45 45 0 0 1 -15.5 -42.2 L 0 0" fill="#FF8C69"/>
+    <path d="M 0 0 L -15.5 -42.2 A 45 45 0 0 1 -8 -44.3 L 0 0" fill="#FFA07A"/>
+    <path d="M 0 0 L -8 -44.3 A 45 45 0 0 1 0 -45 L 0 0" fill="#FFB6C1"/>
+
+    <!-- White center circle -->
+    <circle cx="0" cy="0" r="25" fill="white"/>
+
+    <!-- Utah state outline shape - more accurate representation -->
+    <g transform="scale(1.2)">
+      <rect x="-12" y="-10" width="24" height="20" fill="none" stroke="black" stroke-width="1.8"/>
+      <rect x="-15" y="-12" width="30" height="24" fill="none" stroke="black" stroke-width="1.8"/>
+    </g>
+
+    <!-- UTAH text -->
+    <text x="0" y="5" font-family="Arial Black, sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="black">UTAH</text>
+  </g>
+</svg>
