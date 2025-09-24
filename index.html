@@ -459,7 +459,77 @@
             opacity: 1;
         }
 
-        /* Responsive */
+        /* Enhanced Responsive Design */
+
+        /* Small Mobile Devices (320px - 480px) */
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .logo img {
+                width: 35px !important;
+                height: 35px !important;
+            }
+
+            .logo span {
+                font-size: 0.7rem !important;
+            }
+
+            /* Hero section mobile */
+            .hero-container {
+                padding: 0 1rem;
+            }
+
+            /* Make hero section stack vertically on mobile */
+            .hero-container > div > div:first-child {
+                flex-direction: column !important;
+                gap: 2rem !important;
+                text-align: center !important;
+            }
+
+            .hero-container img {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .hero-container h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-container h2 {
+                font-size: 1.8rem !important;
+            }
+
+            .hero-container h3 {
+                font-size: 1.5rem !important;
+            }
+
+            /* Event details mobile */
+            .hero-container > div > div:nth-child(2) > div {
+                flex-direction: column !important;
+                gap: 2rem !important;
+            }
+
+            .hero-container > div > div:nth-child(2) > div > div {
+                padding: 0 !important;
+            }
+
+            /* Hide vertical lines on mobile */
+            .hero-container > div > div:nth-child(2) > div > div[style*="width: 2px"] {
+                display: none !important;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Tablet and Medium Mobile (481px - 768px) */
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
@@ -490,6 +560,114 @@
             .speakers,
             .tickets {
                 grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            /* Hero section tablet */
+            .hero-container > div > div:first-child {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-container img {
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            /* Event details tablet */
+            .hero-container > div > div:nth-child(2) > div {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            /* Hide vertical lines on tablet */
+            .hero-container > div > div:nth-child(2) > div > div[style*="width: 2px"] {
+                display: none;
+            }
+
+            .schedule-table {
+                font-size: 0.9rem;
+            }
+
+            .schedule-table th,
+            .schedule-table td {
+                padding: 0.75rem;
+            }
+
+            /* Proposal section mobile */
+            .proposals-container {
+                flex-direction: column !important;
+                gap: 2rem !important;
+            }
+
+            .proposals-topics {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+
+        /* Large Tablets and Small Desktops (769px - 1024px) */
+        @media (max-width: 1024px) {
+            .hero-container {
+                max-width: 95%;
+            }
+
+            .container {
+                max-width: 95%;
+            }
+
+            .highlights {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .speakers {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .tickets {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* Landscape Mobile Phones */
+        @media (max-width: 896px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 2rem 0;
+            }
+
+            .hero-container > div > div:first-child {
+                flex-direction: row !important;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-container img {
+                width: 80px !important;
+                height: 80px !important;
+            }
+
+            .hero-container h1 {
+                font-size: 2.5rem !important;
+            }
+        }
+
+        /* Add utility classes for responsive text */
+        @media (max-width: 480px) {
+            .responsive-text-lg {
+                font-size: 1.2rem !important;
+            }
+
+            .responsive-text-md {
+                font-size: 1rem !important;
+            }
+
+            .responsive-text-sm {
+                font-size: 0.9rem !important;
             }
         }
 
@@ -636,7 +814,7 @@
     <!-- Now Accepting Proposals Section -->
     <section class="section" style="background: #E8E2DD; padding: 4rem 0;">
         <div class="container" style="max-width: 1400px; margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: start; gap: 3rem;">
+            <div class="proposals-container" style="display: flex; justify-content: space-between; align-items: start; gap: 3rem;">
                 
                 <!-- Left Side - Black Banner and Content -->
                 <div style="flex: 1; max-width: 900px;">
@@ -656,7 +834,7 @@
                         </p>
                         
                         <!-- Two Column Topics List -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem;">
+                        <div class="proposals-topics" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem;">
                             <!-- Left Column -->
                             <div>
                                 <h3 style="font-size: 1.3rem; font-weight: 700; color: #1A1A1A; margin-bottom: 1.5rem; text-align: center; font-family: 'Arial', sans-serif;">Talent Development</h3>
